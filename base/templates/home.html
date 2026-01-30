@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="home-wrapper">
+    <div class="sub-navbar">
+        <div class="categories">
+        {% for i in all_categories %}
+        <form action="">
+            <input type="submit" value="{{i.category_name}}" name="category_nav">
+        </form>
+        {% endfor %}
+        <a href="{% url 'home' %}" class="all-prod-btn">All Products</a>
+    </div>
+</div>
+<div class="home-container">
+    <h2>All Products</h2>
+
+    {% for i in all_products %}
+    <div class="product-card">
+        {% if trend %}
+            <div class="trend-badge">Trending Now..!</div>
+        {% endif %}
+        {% if offer %}
+            <div class="offer-badge">Flat 50% Off...! Grab Now...!</div>
+        {% endif %}
+        <img src="{{i.product_image.url}}" alt="Product Image">
+        <h3>{{ i.product_name }}</h3>
+        <p class="cat">{{ i.product_category }}</p>
+        <p class="desc">{{ i.product_desc }}</p>
+        <p class="price">₹ {{ i.product_price }}</p>
+        <div class="product-action">
+            <a href="{% url 'addtocart' i.id %}">Add To Cart</a>
+            <a href="{% url 'product_detail' i.id %}">Details</a>
+        </div>
+    </div>
+    {% empty %}
+    <h3>No products available</h3>
+    {% endfor %}
+</div>
+</div>
+{% endblock content %}
+

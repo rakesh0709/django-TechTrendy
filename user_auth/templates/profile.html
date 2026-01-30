@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="profile-container">
+    <h1>User Profile</h1>
+    {% if updated %}
+        <p class="success-message">Profile updated successfully ✅</p>
+    {% endif %}
+    <div class="profile-details">
+        <h2>User Name: {{request.user.username}}</h2>
+        <h2>Verified: {{request.user.is_authenticated}}</h2>
+        <h2>First Name: {{request.user.first_name}}</h2>
+        <h2>Last Name: {{request.user.last_name}}</h2>
+        <h2>Email: {{request.user.email}}</h2>
+    </div>
+
+    <div class="profile-actions">
+        <a href="{% url 'profile_update' %}">Update Profile</a>
+        <a href="{% url 'resetpass' %}">Reset Password</a>
+        <a href="{% url 'logout_' %}">Logout</a>
+    </div>
+</div>
+{% endblock content %}

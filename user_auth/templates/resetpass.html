@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="reset-password-container">
+    <center>
+        <h1>Update Your Password Here</h1><br><br>
+
+    {% if not_verified %}
+        <h2 class="error-message">Incorrect Old Password</h2>
+        {% endif %}
+        {% if password_invalid %}
+            <h2 class="error-message">{{ password_invalid_msg }}</h2>
+        {% endif %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% if verified %}
+            <label for="" style="color:green;">Enter New Password:</label>
+            <input type="password" name="newpass"><br><br>
+        {% else %}
+            <label for="" style="color:red">Enter Old Password:</label>
+            <input type="password" name="oldpass"><br><br>
+        {% endif %}
+        <input type="submit">
+    </form>
+    </center>
+</div>
+{% endblock content %}

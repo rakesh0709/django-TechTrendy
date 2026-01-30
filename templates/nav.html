@@ -1,0 +1,42 @@
+<nav>
+    <div class="logo">
+        <h1>Tech Trendy</h1>
+    </div>
+    <div class="links">
+        {% if request.user.is_authenticated %}
+            {% if not profile and not cart and not support and not knowus and not add_products %}
+                <form action="" class="search-form">
+                    <input type="text" name="q" placeholder="Search...">
+                    <input type="submit" value="Search" id="searchbtn">
+                </form>
+            {% endif %}
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'cart' %}">Cart</a>
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'support' %}">Support</a>
+            <a href="{% url 'knowus' %}">Know Us</a>
+            <a href="{% url 'add_products' %}">Add Products</a>
+            <a href="{% url 'logout_' %}">Logout</a>
+            {% if not profile and not cart and not support and not knowus and not add_products %}
+                <form action="">
+                    <input type="submit" name="trending" value="Trending" class="trending-btn">
+                </form>
+                <form action="">
+                    <input type="submit" name="offer" value="Offers" class="offer-btn">
+                </form>
+            {% endif %}
+        {% else %}
+            {% if not login_ %}
+                <form action="" class="search-form">
+                    <input type="text" name="q" placeholder="Search...">
+                    <input type="submit" value="Search" id="searchbtn">
+                </form>
+            {% endif %}
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'login_' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+            <a href="{% url 'support' %}">Support</a>
+            <a href="{% url 'knowus' %}">Know Us</a>
+        {% endif %}
+    </div>
+</nav>

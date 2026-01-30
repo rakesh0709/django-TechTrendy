@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="cart-container">
+    <center>
+    <h3>Cart</h3>
+        <table class="cart-table">
+        <tr>
+            <th>Product Name</th>
+            <th>Product Description</th>
+            <th>Category</th>
+            <th>Product Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Remove</th></tr>
+        <tr>{% for i in cartproducts %}
+            <td>{{i.products_name}}</td>
+            <td>{{i.products_desc}}</td>
+            <td>{{i.product_category}}</td>
+            <td>{{i.products_price}}</td>
+            <td> <a href="{% url 'update_cart' i.id '-' %}" class="minus-btn">-</a>{{ i.quantity }} <a href="{% url 'update_cart' i.id '+' %}" class="plus-btn">+</a> </td>
+            <td>{{i.totalprice}}</td>
+        <td><a href="{% url 'remove_from_cart' i.id %}" class="removebtn">Remove</a></td></tr>
+        {% endfor %}
+        </table>
+            <div class = "cart-summary">
+            <h2>Total Amount:{{ta}}</h2>
+            <a href="">Proceed To Checkout</a>
+            </div>
+</center>
+</div>
+{% endblock content %}
+
