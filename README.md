@@ -1,4 +1,4 @@
-# shopshere
+# TechTrendy
 
 A simple Django-based e-commerce learning project (shopping demo).
 
