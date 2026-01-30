@@ -53,10 +53,3 @@ A simple Django-based e-commerce learning project (shopping demo).
 ## Contributing
 - Create a branch `feature/your-feature` and open a PR to `main`.
 - Follow PEP8 and write tests where appropriate.
-
-## License
-This project is available under the MIT License (see `LICENSE`).
-
----
-
-If you want, I can add a `requirements.txt`, CI config, or a short demo script to populate the DB with sample products.
