@@ -19,10 +19,10 @@ class ProductsModel(models.Model):
 
 
 class CartModel(models.Model):
-    products_name=models.CharField(max_length=10)
+    products_name=models.CharField(max_length=200)
     products_price=models.IntegerField(default=0)
-    products_desc=models.CharField(max_length=200)
-    product_category=models.CharField(max_length=100)
+    products_desc=models.CharField(max_length=500)
+    product_category=models.CharField(max_length=200)
     quantity=models.IntegerField(default=1)
     totalprice=models.IntegerField(default=0)
     host=models.ForeignKey(User,on_delete=models.CASCADE)
