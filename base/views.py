@@ -76,24 +76,23 @@ def cart(request):
 @login_required(login_url='login')
 def addtocart(request, pk):
     pro = ProductsModel.objects.get(id=pk)
-    try:
-        c = CartModel.objects.get(
-            Q(products_name=pro.product_name) & Q(host=request.user)
-        )
-        c.quantity += 1
-        c.totalprice += pro.product_price
-        c.save()
 
-    except CartModel.DoesNotExist:
-        CartModel.objects.create(
-            products_name=pro.product_name,
-            products_desc=pro.product_desc,
-            products_price=pro.product_price,
-            product_category=str(pro.product_category),
-            quantity=1,
-            totalprice=pro.product_price,
-            host=request.user
-        )
+    cart_item, created = CartModel.objects.get_or_create(
+        products_name=pro.product_name,
+        host=request.user,
+        defaults={
+            'products_desc': pro.product_desc,
+            'products_price': pro.product_price,
+            'product_category': str(pro.product_category),
+            'quantity': 1,
+            'totalprice': pro.product_price
+        }
+    )
+    if not created:
+        cart_item.quantity += 1
+        cart_item.totalprice += pro.product_price
+        cart_item.save()
+
     return redirect('cart')
 
 def cart_count(request):
