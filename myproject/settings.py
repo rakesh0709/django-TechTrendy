@@ -4,7 +4,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-7_b=9xw4-40_%9s*k=_&yda$#wk$k)*n*!i7rk=fz$9$(k9x7g'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
@@ -19,8 +19,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,7 +84,4 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 
 # DEFAULT PRIMARY KEY
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
