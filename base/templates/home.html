@@ -28,7 +28,8 @@
         <p class="desc">{{ i.product_desc }}</p>
         <p class="price">₹ {{ i.product_price }}</p>
         <div class="product-action">
-            <a href="{% url 'addtocart' i.id %}">Add To Cart</a>
+            
+            <a href="{% url 'addtocart' i.id %}"onclick="return checkLogin()">Add To Cart</a>
             <a href="{% url 'product_detail' i.id %}">Details</a>
         </div>
     </div>

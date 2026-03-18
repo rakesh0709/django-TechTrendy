@@ -73,7 +73,7 @@ def cart(request):
     return render(request,'cart.html',{'cartproducts':cartproducts,'ta':totalamount,'cart':True,'cart_count':cart_count(request)})
 
 
-@login_required(login_url='login')
+@login_required(login_url='login_')
 def addtocart(request, pk):
     pro = ProductsModel.objects.get(id=pk)
 
