@@ -13,7 +13,7 @@ class ProductsModel(models.Model):
     product_name=models.CharField(max_length=100)
     product_desc=models.CharField(max_length=200)
     product_price=models.IntegerField(default=0)
-    product_image=models.ImageField(default='Default.jpg',upload_to='uploads')
+    product_image=models.URLField()
     trending=models.BooleanField(default=0)
     offer=models.BooleanField(default=0)
 
