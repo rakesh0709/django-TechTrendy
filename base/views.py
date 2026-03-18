@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from . models import ProductsModel,Category,CartModel
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     trend=False
@@ -72,25 +73,27 @@ def cart(request):
     return render(request,'cart.html',{'cartproducts':cartproducts,'ta':totalamount,'cart':True,'cart_count':cart_count(request)})
 
 
-
-def addtocart(request,pk):
-    pro=ProductsModel.objects.get(id=pk)
+@login_required(login_url='login')
+def addtocart(request, pk):
+    pro = ProductsModel.objects.get(id=pk)
     try:
-        c=CartModel.objects.get(Q(products_name=pro.product_name)&Q(host=request.user))
-        c.quantity+=1
-        c.totalprice+=pro.product_price
+        c = CartModel.objects.get(
+            Q(products_name=pro.product_name) & Q(host=request.user)
+        )
+        c.quantity += 1
+        c.totalprice += pro.product_price
         c.save()
-        return redirect('cart')
-    except:
+
+    except CartModel.DoesNotExist:
         CartModel.objects.create(
             products_name=pro.product_name,
             products_desc=pro.product_desc,
             products_price=pro.product_price,
-            product_category=pro.product_category,
+            product_category=str(pro.product_category),
             quantity=1,
             totalprice=pro.product_price,
             host=request.user
-    )
+        )
     return redirect('cart')
 
 def cart_count(request):
