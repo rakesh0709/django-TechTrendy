@@ -16,10 +16,10 @@
 
     {% for i in all_products %}
     <div class="product-card">
-        {% if trend %}
+        {% if i.trend %}
             <div class="trend-badge">Trending Now..!</div>
         {% endif %}
-        {% if offer %}
+        {% if i.offer %}
             <div class="offer-badge">Flat 50% Off...! Grab Now...!</div>
         {% endif %}
         <img src="{{i.product_image.url}}" alt="Product Image">
