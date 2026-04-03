@@ -127,3 +127,24 @@ def remove_from_cart(request,pk):
     cart_item=CartModel.objects.get(id=pk)
     cart_item.delete()
     return redirect('cart')
+
+@login_required(login_url='login_')
+def checkout(request):
+    cartproducts = CartModel.objects.filter(host=request.user)
+    if not cartproducts:
+        return redirect('cart')
+    
+    totalamount = 0
+    for i in cartproducts:
+        totalamount += i.totalprice
+        
+    if request.method == "POST":
+        # Simulate payment gateway processing here.
+        cartproducts.delete()
+        return redirect('payment_success')
+        
+    return render(request, 'checkout.html', {'ta': totalamount})
+
+@login_required(login_url='login_')
+def payment_success(request):
+    return render(request, 'payment_success.html')

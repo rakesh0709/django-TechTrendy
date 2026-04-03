@@ -1,43 +1,49 @@
 {% extends 'main.html' %}
 {% block content %}
-<div class="auth-container">
-    <h2>Register Here</h2>
-    <form action="" method="POST" class="auth-form">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="firstname">First Name:</label>
-            <input type="text" id="firstname" name="firstname" required>
-        </div>
-        <div class="form-group">
-            <label for="lastname">Last Name:</label>
-            <input type="text" id="lastname" name="lastname" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="username">User Name:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" minlength="6" maxlength="64" required>
-        </div>
-        <div class="form-group">
-            <label for="confirmpassword">Confirm Password:</label>
-            <input type="password" id="confirmpassword" name="confirmpassword" required>
-        </div>
+<div class="container my-5 d-flex justify-content-center">
+    <div class="card shadow-sm border-0 p-4 w-100" style="max-width: 550px; border-radius: 1rem;">
+        <h2 class="text-center fw-bold mb-4">Create an Account</h2>
         {% if password_mismatch %}
-            <p class="error-message">Passwords do not match.</p>
+            <div class="alert alert-danger">Passwords do not match.</div>
         {% endif %}
         {% if password_invalid %}
-            <p class="error-message">{{ password_invalid_msg }}</p>
+            <div class="alert alert-danger">{{ password_invalid_msg }}</div>
         {% endif %}
         {% if status %}
-            <p class="error-message">Username already exists. Choose another.</p>
+            <div class="alert alert-danger">Username already exists. Choose another.</div>
         {% endif %}
-        <input type="submit" value="Register" class="btn">
-    </form>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="row g-3 mb-3">
+                <div class="col-sm-6">
+                    <label for="firstname" class="form-label fw-semibold">First Name</label>
+                    <input type="text" class="form-control bg-light border-0" id="firstname" name="firstname" required>
+                </div>
+                <div class="col-sm-6">
+                    <label for="lastname" class="form-label fw-semibold">Last Name</label>
+                    <input type="text" class="form-control bg-light border-0" id="lastname" name="lastname" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label fw-semibold">Email Address</label>
+                <input type="email" class="form-control bg-light border-0" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label fw-semibold">Username</label>
+                <input type="text" class="form-control bg-light border-0" id="username" name="username" required>
+            </div>
+            <div class="row g-3 mb-4">
+                <div class="col-sm-6">
+                    <label for="password" class="form-label fw-semibold">Password</label>
+                    <input type="password" class="form-control bg-light border-0" id="password" name="password" minlength="6" maxlength="64" required>
+                </div>
+                <div class="col-sm-6">
+                    <label for="confirmpassword" class="form-label fw-semibold">Confirm Password</label>
+                    <input type="password" class="form-control bg-light border-0" id="confirmpassword" name="confirmpassword" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold">Register Now</button>
+        </form>
+    </div>
 </div>
 {% endblock content %}

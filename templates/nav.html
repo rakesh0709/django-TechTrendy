@@ -1,42 +1,50 @@
-<nav>
-    <div class="logo">
-        <h1>Tech Trendy</h1>
-    </div>
-    <div class="links">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 sticky-top shadow-sm">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand fw-bold fs-3" href="{% url 'home' %}">
+      <span class="text-primary">Tech</span> Trendy
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'home' %}">Home</a>
+        </li>
         {% if request.user.is_authenticated %}
-            {% if not profile and not cart and not support and not knowus and not add_products %}
-                <form action="" class="search-form">
-                    <input type="text" name="q" placeholder="Search...">
-                    <input type="submit" value="Search" id="searchbtn">
-                </form>
-            {% endif %}
-            <a href="{% url 'home' %}">Home</a>
-            <a href="{% url 'cart' %}">Cart</a>
-            <a href="{% url 'profile' %}">Profile</a>
-            <a href="{% url 'support' %}">Support</a>
-            <a href="{% url 'knowus' %}">Know Us</a>
-            <!-- <a href="{% url 'add_products' %}">Add Products</a> -->
-            <a href="{% url 'logout_' %}">Logout</a>
-            {% if not profile and not cart and not support and not knowus and not add_products %}
-                <form action="">
-                    <input type="submit" name="trending" value="Trending" class="trending-btn">
-                </form>
-                <form action="">
-                    <input type="submit" name="offer" value="Offers" class="offer-btn">
-                </form>
-            {% endif %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'support' %}">Support</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'knowus' %}">Know Us</a></li>
+        <li class="nav-item"><a class="nav-link text-danger fw-bold" href="{% url 'logout_' %}">Logout</a></li>
         {% else %}
-            {% if not login_ %}
-                <form action="" class="search-form">
-                    <input type="text" name="q" placeholder="Search...">
-                    <input type="submit" value="Search" id="searchbtn">
-                </form>
-            {% endif %}
-            <a href="{% url 'home' %}">Home</a>
-            <a href="{% url 'login_' %}">Login</a>
-            <a href="{% url 'register' %}">Register</a>
-            <a href="{% url 'support' %}">Support</a>
-            <a href="{% url 'knowus' %}">Know Us</a>
+        <li class="nav-item"><a class="nav-link" href="{% url 'login_' %}">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'support' %}">Support</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'knowus' %}">Know Us</a></li>
         {% endif %}
+      </ul>
+      {% if not profile and not cart and not support and not knowus and not add_products %}
+      <div class="d-flex align-items-center flex-wrap gap-2">
+        <form class="d-flex" action="">
+          <input class="form-control me-2 rounded-pill" type="search" placeholder="Search..." aria-label="Search" name="q">
+          <button class="btn btn-outline-primary rounded-pill px-4" type="submit">Search</button>
+        </form>
+        {% if request.user.is_authenticated %}
+        <form action="">
+            <input type="submit" name="trending" value="Trending" class="btn btn-warning rounded-pill fw-bold">
+        </form>
+        <form action="">
+            <input type="submit" name="offer" value="Offers" class="btn btn-danger rounded-pill fw-bold">
+        </form>
+        {% endif %}
+      </div>
+      {% elif not request.user.is_authenticated and not login_ %}
+      <form class="d-flex" action="">
+          <input class="form-control me-2 rounded-pill" type="search" placeholder="Search..." aria-label="Search" name="q">
+          <button class="btn btn-outline-primary rounded-pill px-4" type="submit">Search</button>
+      </form>
+      {% endif %}
     </div>
+  </div>
 </nav>

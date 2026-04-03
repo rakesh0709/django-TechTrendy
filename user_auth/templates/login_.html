@@ -1,21 +1,25 @@
 {% extends 'main.html' %}
 {% block content %}
-<div class="auth-container">
-    <h2>Login Here</h2>
-    {% if status %}
-        <p class="error-message">Invalid UserName/Password Please Try again...!</p>
-    {% endif %}
-    <form action="" method="POST" class="auth-form">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="user_name">User Name:</label>
-            <input type="text" id="user_name" name="user_name">
-        </div>
-        <div class="form-group">
-            <label for="_password">Password:</label>
-            <input type="password" id="_password" name="_password">
-        </div>
-        <input type="submit" value="Login" class="btn">
-    </form>
+<div class="container my-5 d-flex justify-content-center">
+    <div class="card shadow-sm border-0 p-4 w-100" style="max-width: 450px; border-radius: 1rem;">
+        <h2 class="text-center fw-bold mb-4">Welcome Back</h2>
+        {% if status %}
+            <div class="alert alert-danger" role="alert">
+                Invalid UserName/Password. Please try again!
+            </div>
+        {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="user_name" class="form-label fw-semibold">User Name</label>
+                <input type="text" class="form-control form-control-lg bg-light border-0" id="user_name" name="user_name" required>
+            </div>
+            <div class="mb-4">
+                <label for="_password" class="form-label fw-semibold">Password</label>
+                <input type="password" class="form-control form-control-lg bg-light border-0" id="_password" name="_password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold">Login</button>
+        </form>
+    </div>
 </div>
 {% endblock content %}

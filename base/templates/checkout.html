@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 p-4" style="border-radius: 1rem;">
+                <h3 class="fw-bold mb-4 text-center">Secure Payment Checkout</h3>
+                <div class="alert alert-info text-center">
+                    Total Amount to Pay: <strong>₹{{ ta }}</strong>
+                </div>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Cardholder Name</label>
+                        <input type="text" class="form-control bg-light border-0" required placeholder="John Doe">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Card Number</label>
+                        <input type="text" class="form-control bg-light border-0" required placeholder="xxxx xxxx xxxx xxxx" maxlength="19">
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label class="form-label fw-semibold">Expiry Date</label>
+                            <input type="text" class="form-control bg-light border-0" required placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label fw-semibold">CVV</label>
+                            <input type="password" class="form-control bg-light border-0" required placeholder="***" maxlength="4">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg w-100 rounded-pill fw-bold" style="padding: 14px;">Pay ₹{{ ta }} Securely</button>
+                    <div class="text-center mt-3 text-muted small">
+                        This is a simulated payment gateway for demonstration purposes.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

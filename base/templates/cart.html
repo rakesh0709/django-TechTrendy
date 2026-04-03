@@ -1,32 +1,49 @@
 {% extends 'main.html' %}
 {% block content %}
-<div class="cart-container">
-    <center>
-    <h3>Cart</h3>
-        <table class="cart-table">
-        <tr>
-            <th>Product Name</th>
-            <th>Product Description</th>
-            <th>Category</th>
-            <th>Product Price</th>
-            <th>Quantity</th>
-            <th>Total Price</th>
-            <th>Remove</th></tr>
-        <tr>{% for i in cartproducts %}
-            <td>{{i.products_name}}</td>
-            <td>{{i.products_desc}}</td>
-            <td>{{i.product_category}}</td>
-            <td>{{i.products_price}}</td>
-            <td> <a href="{% url 'update_cart' i.id '-' %}" class="minus-btn">-</a>{{ i.quantity }} <a href="{% url 'update_cart' i.id '+' %}" class="plus-btn">+</a> </td>
-            <td>{{i.totalprice}}</td>
-        <td><a href="{% url 'remove_from_cart' i.id %}" class="removebtn">Remove</a></td></tr>
-        {% endfor %}
-        </table>
-            <div class = "cart-summary">
-            <h2>Total Amount:{{ta}}</h2>
-            <a href="">Proceed To Checkout</a>
+<div class="container my-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+            <h3 class="fw-bold mb-4">Shopping Cart</h3>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle text-center mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in cartproducts %}
+                        <tr>
+                            <td class="fw-semibold">{{i.products_name}}</td>
+                            <td><small class="text-muted text-truncate d-inline-block" style="max-width: 150px;">{{i.products_desc}}</small></td>
+                            <td><span class="badge bg-secondary">{{i.product_category}}</span></td>
+                            <td class="text-success fw-bold">₹{{i.products_price}}</td>
+                            <td> 
+                                <div class="d-flex justify-content-center align-items-center gap-2">
+                                    <a href="{% url 'update_cart' i.id '-' %}" class="btn btn-sm btn-outline-warning rounded-circle fw-bold" style="width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center;">-</a>
+                                    <span class="fs-5">{{ i.quantity }}</span>
+                                    <a href="{% url 'update_cart' i.id '+' %}" class="btn btn-sm btn-outline-success rounded-circle fw-bold" style="width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center;">+</a> 
+                                </div>
+                            </td>
+                            <td class="fw-bold">₹{{i.totalprice}}</td>
+                            <td><a href="{% url 'remove_from_cart' i.id %}" class="btn btn-sm btn-danger rounded-pill">Remove</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-</center>
+            <div class="d-flex justify-content-end align-items-center mt-4 pt-3 border-top gap-4">
+                <h4 class="mb-0">Total: <strong class="text-primary">₹{{ta}}</strong></h4>
+                <a href="{% url 'checkout' %}" class="btn btn-dark btn-lg rounded-pill px-4">Proceed To Checkout</a>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}
 
